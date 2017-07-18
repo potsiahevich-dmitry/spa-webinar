@@ -3,20 +3,21 @@ import cx from 'classnames';
 
 import './ColorPicker.less';
 
-const COLORS = ['#FFFFFF', '#80D8FF', '#FFFF8D', '#FF8A80', '#CCFF90', '#CFD8DC', '#FFD180'];
+const PAYERS = ['D', 'O', 'L'];
+const COLORS = {D: '#FF8A80', O: '#CCFF90', L: '#80D8FF'};
 
 const ColorPicker = React.createClass({
     render() {
         return (
             <div className='ColorPicker'>
                 {
-                    COLORS.map(color =>
+                    PAYERS.map(payer =>
                         <div
-                            key={color}
-                            className={cx('ColorPicker__swatch', { selected: this.props.value === color })}
-                            style={{ backgroundColor: color }}
-                            onClick={this.props.onChange.bind(null, color)}
-                        />
+                            key={payer}
+                            className={cx('ColorPicker__swatch', { selected: this.props.value === payer })}
+                            style={{ backgroundColor: COLORS[payer] }}
+                            onClick={this.props.onChange.bind(null, payer)}
+                        >{payer}</div>
                     )
                 }
             </div>

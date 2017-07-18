@@ -1,8 +1,6 @@
-.Note {
-    width: 250px;
+.Cost {
     height: auto;
-    float: left;
-    background-color: yellow;
+    position: relative;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     border-radius: 2px;
     padding: 10px;
@@ -10,22 +8,32 @@
     transition: box-shadow .3s;
     white-space: pre-wrap;
     word-wrap: break-word;
+    display: flex;
 
     &:hover {
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 
-        .Note__del-icon {
+        .Cost__del-icon {
             display: block;
         }
     }
 }
 
-.Note__title {
-    margin: 0;
-    margin-bottom: 5px;
+.Cost__cost {
+    text-align: right;
+    padding-right: 5px;
+    flex-grow: 3;
 }
 
-.Note__del-icon {
+.Cost__title {
+    flex-grow: 6;
+}
+
+.Cost__payed {
+    flex-grow: 1;
+}
+
+.Cost__del-icon {
     position: absolute;
     top:5px;
     right:5px;

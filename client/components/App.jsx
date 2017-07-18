@@ -1,17 +1,17 @@
 import React from 'react';
 
-import NotesStore from '../stores/NotesStore';
-import NotesActions from '../actions/NotesActions';
+import CostsStore from '../stores/CostsStore';
+import CostsActions from '../actions/CostsActions';
 
-import NoteEditor from './NoteEditor.jsx';
-import NotesGrid from './NotesGrid.jsx';
+import CostEditor from './CostEditor.jsx';
+import CostsGrid from './CostsGrid.jsx';
 
 import './App.less';
 
 function getStateFromFlux() {
     return {
-        isLoading: NotesStore.isLoading(),
-        notes: NotesStore.getNotes()
+        isLoading: CostsStore.isLoading(),
+        costs: CostsStore.getCosts()
     };
 }
 
@@ -21,31 +21,37 @@ const App = React.createClass({
     },
 
     componentWillMount() {
-        NotesActions.loadNotes();
+        CostsActions.loadCosts();
     },
 
     componentDidMount() {
-        NotesStore.addChangeListener(this._onChange);
+        CostsStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount() {
-        NotesStore.removeChangeListener(this._onChange);
+        CostsStore.removeChangeListener(this._onChange);
     },
 
-    handleNoteDelete(note) {
-        NotesActions.deleteNote(note.id);
+    handleCostDelete(cost) {
+        CostsActions.deleteCost(cost.id);
     },
 
-    handleNoteAdd(noteData) {
-        NotesActions.createNote(noteData);
+    handleCostToggle(cost) {
+        CostsActions.toggleCost(cost.id, !cost.payed);
+    },
+
+    handleCostAdd(costData) {
+        CostsActions.createCost(costData);
     },
 
     render() {
         return (
             <div className='App'>
-                <h2 className='App__header'>NotesApp</h2>
-                <NoteEditor onNoteAdd={this.handleNoteAdd} />
-                <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
+                <h2 className='App__header'>Wedding TOTAL: <b>{this.state.costs.reduce((total, cost) => total + cost.cost, 0)}</b></h2>
+                <CostEditor onCostAdd={this.handleCostAdd} />
+                <CostsGrid costs={this.state.costs.filter(({payer}) => payer === 'D')} payer="D" onCostDelete={this.handleCostDelete} onCostToggle={this.handleCostToggle} />
+                <CostsGrid costs={this.state.costs.filter(({payer}) => payer === 'O')} payer="O" onCostDelete={this.handleCostDelete} onCostToggle={this.handleCostToggle} />
+                <CostsGrid costs={this.state.costs.filter(({payer}) => payer === 'L')} payer="L" onCostDelete={this.handleCostDelete} onCostToggle={this.handleCostToggle} />
             </div>
         );
     },

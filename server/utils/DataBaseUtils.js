@@ -2,30 +2,34 @@ import mongoose from "mongoose";
 
 import config from '../../etc/config.json';
 
-import '../models/Note';
+import '../models/Cost';
 
-const Note = mongoose.model('Note');
+const Cost = mongoose.model('Cost');
 
 export function setUpConnection() {
-    mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.name}`);
+    mongoose.connect(`mongodb://${config.db.user}:${config.db.pass}@${config.db.host}:${config.db.port}/${config.db.name}`);
 }
 
-export function listNotes(id) {
-    return Note.find();
+export function listCosts(id) {
+    return Cost.find();
 }
 
-export function createNote(data) {
-    const note = new Note({
+export function createCost(data) {
+    const cost = new Cost({
         title: data.title,
-        text: data.text,
-        color: data.color,
+        cost: data.cost,
+        payer: data.payer,
+        payed: data.payed,
         createdAt: new Date()
     });
 
-    return note.save();
+    return cost.save();
 }
 
-export function deleteNote(id) {
-    return Note.findById(id).remove();
+export function deleteCost(id) {
+    return Cost.findById(id).remove();
 }
 
+export function toggleCost(id, data) {
+    return Cost.findById(id).update({payed: data.payed});
+}

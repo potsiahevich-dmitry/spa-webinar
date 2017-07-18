@@ -222,7 +222,7 @@ Kitten.find(function (err, kittens) {
 Kitten.find({ name: "fluffy" }, callback);
 ```
 
-Теперь давайте отойдем от котят и вернемся к нашим заметкам. Сохраним модель заметки в папке `/server/models/Note.js`. Теперь нужно связать взаимодействие с базой данных и запросы. Для работы с базой мы создадим утилиту `server/utils/DataBaseUtils.js`, в которой просто изолируем методы для работы с базой.
+Теперь давайте отойдем от котят и вернемся к нашим заметкам. Сохраним модель заметки в папке `/server/models/Cost.js`. Теперь нужно связать взаимодействие с базой данных и запросы. Для работы с базой мы создадим утилиту `server/utils/DataBaseUtils.js`, в которой просто изолируем методы для работы с базой.
 
 Сначала нам нужно настроить соединение:
 
@@ -958,7 +958,7 @@ export default keyMirror({
 
 Действия же выглядят таким образом:
 
-**client/actions/NotesActions.js**
+**client/actions/CostsActions.js**
 ```
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import Constants from '../constants/AppConstants';
@@ -1012,7 +1012,7 @@ export default NoteActions;
 
 Хранилища в Flux управляют состоянием определенных частей предметной области вашего приложения. На более высоком уровне это означает, что Хранилища хранят данные, методы получения этих данных и зарегистрированные в Диспетчере обработчики Действий.
 
-**client/stores/NotesStore.js**
+**client/stores/CostsStore.js**
 ```
 import { EventEmitter } from 'events';
 
@@ -1108,8 +1108,8 @@ import React from 'react';
 import NotesStore from '../stores/NotesStore';
 import NotesActions from '../actions/NotesActions';
 
-import NoteEditor from './NoteEditor.jsx';
-import NotesGrid from './NotesGrid.jsx';
+import NoteEditor from './CostEditor.jsx';
+import NotesGrid from './CostsGrid.jsx';
 
 import './App.less';
 

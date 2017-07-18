@@ -3,15 +3,19 @@ import axios from 'axios';
 import { apiPrefix } from '../../etc/config.json';
 
 export default {
-    listNotes() {
-        return axios.get(`${apiPrefix}/notes`);
+    listCosts() {
+        return axios.get(`${apiPrefix}/costs`);
     },
 
-    createNote(data) {
-        return axios.post(`${apiPrefix}/notes`, data);
+    createCost(data) {
+        return axios.post(`${apiPrefix}/costs`, data);
     },
 
-    deleteNote(noteId) {
-        return axios.delete(`${apiPrefix}/notes/${noteId}`);
+    deleteCost(costId) {
+        return axios.delete(`${apiPrefix}/costs/${costId}`);
+    },
+
+    toggleCost(costId, payed) {
+        return axios.post(`${apiPrefix}/costs/${costId}`, { payed: payed });
     }
 }

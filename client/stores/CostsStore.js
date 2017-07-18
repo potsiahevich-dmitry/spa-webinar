@@ -5,17 +5,18 @@ import AppConstants from '../constants/AppConstants';
 
 const CHANGE_EVENT = 'change';
 
-let _notes = [];
+let _costs = [];
 let _loadingError = null;
 let _isLoading = true;
 
-function formatNote(note) {
+function formatCost(cost) {
     return {
-        id: note._id,
-        title: note.title,
-        text: note.text,
-        color: note.color || '#ffffff',
-        createdAt: note.createdAt
+        id: cost._id,
+        title: cost.title,
+        cost: cost.cost,
+        payer: cost.payer,
+        payed: cost.payed,
+        createdAt: cost.createdAt
     };
 }
 
@@ -24,8 +25,8 @@ const TasksStore = Object.assign({}, EventEmitter.prototype, {
         return _isLoading;
     },
 
-    getNotes() {
-        return _notes;
+    getCosts() {
+        return _costs;
     },
 
     emitChange: function() {
@@ -43,23 +44,23 @@ const TasksStore = Object.assign({}, EventEmitter.prototype, {
 
 AppDispatcher.register(function(action) {
     switch(action.type) {
-        case AppConstants.LOAD_NOTES_REQUEST: {
+        case AppConstants.LOAD_COSTS_REQUEST: {
             _isLoading = true;
 
             TasksStore.emitChange();
             break;
         }
 
-        case AppConstants.LOAD_NOTES_SUCCESS: {
+        case AppConstants.LOAD_COSTS_SUCCESS: {
             _isLoading = false;
-            _notes = action.notes.map( formatNote );
+            _costs = action.costs.map( formatCost );
             _loadingError = null;
 
             TasksStore.emitChange();
             break;
         }
 
-        case AppConstants.LOAD_NOTES_FAIL: {
+        case AppConstants.LOAD_COSTS_FAIL: {
             _loadingError = action.error;
 
             TasksStore.emitChange();

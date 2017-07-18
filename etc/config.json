@@ -1,0 +1,11 @@
+{
+    "apiPrefix": "http://localhost:8080",
+    "serverPort": "8080",
+    "db":{
+        "user": "4epB9I4oK",
+        "pass": "guy19732800",
+        "name": "wdng_costs",
+        "host": "ds032887.mlab.com",
+        "port": 32887
+    }
+}
